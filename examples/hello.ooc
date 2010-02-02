@@ -6,7 +6,7 @@ import structs/HashMap
 
 
 HelloApplication: class extends Application {
-    parseRequest: func(request: Request) {
+    parseRequest: func {
         "Request path: %s" format(request path) println()
         "Request method: %s" format(request method) println()
         "Request remote addr: %s port %d" format(request remoteAddress, request remotePort) println()

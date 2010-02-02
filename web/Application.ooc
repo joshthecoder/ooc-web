@@ -8,7 +8,9 @@ ResponseWriter: abstract class {
 }
 
 Application: class {
-    parseRequest: func(request: Request) {}
+    request: Request
+
+    parseRequest: func {}
     sendHeaders: func(headers: HashMap<String>) {}
     sendResponse: func(writer: ResponseWriter) {}
 }
