@@ -16,8 +16,8 @@ HelloApplication: class extends Application {
         headers["Content-type"] = "text/html"
     }
 
-    sendResponse: func(writer: ResponseWriter) {
-        writer write("<html>"). write("<body>"). write("<h1>Hello!</h1>"). write("</body></html>")
+    sendResponse: func(response: ResponseWriter) {
+        response write("<html>"). write("<body>"). write("<h1>Hello!</h1>"). write("</body></html>")
     }
 }
 

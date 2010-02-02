@@ -12,6 +12,6 @@ Application: class {
 
     parseRequest: func {}
     sendHeaders: func(headers: HashMap<String>) {}
-    sendResponse: func(writer: ResponseWriter) {}
+    sendResponse: func(response: ResponseWriter) {}
 }
 

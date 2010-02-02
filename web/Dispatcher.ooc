@@ -1,5 +1,6 @@
 use web
 import web/Application
+import structs/[LinkedList, HashMap]
 
 
 /**
@@ -7,11 +8,28 @@ import web/Application
  * applications in order from head to tail.
  */
 Dispatcher: class extends Application {
-    add: func(application: Application) {
-        //TODO: implement me
+    applications: LinkedList<Application>
+
+    init: func ~dispatch {
+        applications = LinkedList<Application> new()
     }
 
-    remove: func(application: Application) {
-        //TODO: implement me
+    parseRequest: func {
+        for (app: Application in applications) {
+            app request = request
+            app parseRequest()
+        }
+    }
+
+    sendHeaders: func(headers: HashMap<String>) {
+        for (app: Application in applications) {
+            app sendHeaders(headers)
+        }
+    }
+
+    sendResponse: func(response: ResponseWriter) {
+        for (app: Application in applications) {
+            app sendResponse(response)
+        }
     }
 }
