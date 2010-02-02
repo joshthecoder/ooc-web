@@ -1,5 +1,3 @@
-use wasp
-
 import structs/HashMap
 
 Request: abstract class {

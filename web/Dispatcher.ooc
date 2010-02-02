@@ -1,5 +1,5 @@
-use wasp
-import wasp/Application
+use web
+import web/Application
 
 
 /**

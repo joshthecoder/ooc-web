@@ -1,8 +1,9 @@
 ooc-web
 ========
-This is a working concept for a Web Application and Server Protocol(WASP).
-WASP will provide a common interface for web applications to any web server
-that implements the protocol.
+A web application and server specification and library. This provides a
+standard interface for web application to communicate with web servers.
+Your web application will work with any web server that implements
+this specification.
 
 Author: Joshua Roesslein
 License:

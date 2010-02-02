@@ -1,7 +1,7 @@
-use wasp
+use web
 use fastcgi
 
-import wasp/Application
+import web/Application
 import fastcgi/FCGIServer
 
 
