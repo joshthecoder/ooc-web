@@ -1,6 +1,6 @@
 use web
 import web/Application
-import structs/[LinkedList, HashMap]
+import structs/LinkedList
 
 
 /**
@@ -21,7 +21,7 @@ Dispatcher: class extends Application {
         }
     }
 
-    sendHeaders: func(headers: HashMap<String>) {
+    sendHeaders: func(headers: HeaderMap) {
         for (app: Application in applications) {
             app sendHeaders(headers)
         }

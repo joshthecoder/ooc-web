@@ -2,7 +2,6 @@ use web, fastcgi
 
 import web/[Application, Request]
 import fastcgi/Server
-import structs/HashMap
 
 
 HelloApplication: class extends Application {
@@ -12,7 +11,7 @@ HelloApplication: class extends Application {
         "Request remote addr: %s port %d" format(request remoteAddress, request remotePort) println()
     }
 
-    sendHeaders: func(headers: HashMap<String>) {
+    sendHeaders: func(headers: HeaderMap) {
         headers["Content-type"] = "text/html"
     }
 

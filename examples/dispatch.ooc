@@ -2,11 +2,10 @@ use web, fastcgi
 
 import web/[Application, Dispatcher]
 import fastcgi/Server
-import structs/HashMap
 
 
 RootApplication: class extends Application {
-    sendHeaders: func(headers: HashMap<String>) {
+    sendHeaders: func(headers: HeaderMap) {
         headers["Content-type"] = "text/plain"
     }
 }
