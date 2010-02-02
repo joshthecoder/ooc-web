@@ -1,7 +1,7 @@
 ooc-web
 ========
 A web application and server specification and library. This provides a
-standard interface for web application to communicate with web servers.
+standard interface for web applications to communicate with web servers.
 Your web application will work with any web server that implements
 this specification.
 
