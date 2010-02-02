@@ -11,8 +11,8 @@ ResponseWriter: abstract class {
 }
 
 Application: abstract class {
-    parseRequest: func(request: Request) -> Bool
-    sendHeaders: func(headers: HashMap<String>) -> Bool
-    sendResponse: func(writer: ResponseWriter) -> Bool
+    parseRequest: func(request: Request)
+    sendHeaders: func(headers: HashMap<String>)
+    sendResponse: func(writer: ResponseWriter)
 }
 
