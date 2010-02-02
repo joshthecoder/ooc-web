@@ -3,11 +3,11 @@ import web/Request
 import structs/HashMap
 
 ResponseWriter: abstract class {
-    write: func(data: String) -> Int { return 0}
-    flush: func {}
+    write: abstract func(data: String) -> Int
+    flush: abstract func
 }
 
-Application: abstract class {
+Application: class {
     parseRequest: func(request: Request) {}
     sendHeaders: func(headers: HashMap<String>) {}
     sendResponse: func(writer: ResponseWriter) {}

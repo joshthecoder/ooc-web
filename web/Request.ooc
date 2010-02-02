@@ -1,15 +1,10 @@
-import structs/HashMap
-
-Request: class {
-    init: func {
-        headers = HashMap<String> new()
-    }
-
+Request: abstract class {
     path: String
     method: String
+    remoteAddress: String
     remoteHost: String
-    remotePort: Int
+    remotePort: String
 
-    headers: HashMap<String>
+    getHeader: abstract func(name: String) -> String
 }
 

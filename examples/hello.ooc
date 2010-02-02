@@ -2,11 +2,22 @@ use web, fastcgi
 
 import web/[Application, Request]
 import fastcgi/Server
+import structs/HashMap
 
 
 HelloApplication: class extends Application {
     parseRequest: func(request: Request) {
         "Request path: %s" format(request path) println()
+        "Request method: %s" format(request method) println()
+        "Request remote addr: %s port %d" format(request remoteAddress, request remotePort) println()
+    }
+
+    sendHeaders: func(headers: HashMap<String>) {
+        headers["Content-type"] = "text/html"
+    }
+
+    sendResponse: func(writer: ResponseWriter) {
+        writer write("<html>"). write("<body>"). write("<h1>Hello!</h1>"). write("</body></html>")
     }
 }
 
