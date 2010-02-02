@@ -1,17 +1,6 @@
+use web
+import web/Request
 import structs/HashMap
-
-Request: class {
-    init: func {
-        headers = HashMap<String> new()
-    }
-
-    path: String
-    method: String
-    remoteHost: String
-    remotePort: Int
-
-    headers: HashMap<String>
-}
 
 ResponseWriter: abstract class {
     write: func(data: String) -> Int { return 0}
