@@ -1,11 +1,9 @@
 ooc-web
 ========
-A web application and server specification and library. This provides a
+A web application and server library. This provides a
 standard interface for web applications to communicate with web servers.
 Your web application will work with any web server that implements
 this specification.
 
 Author: Joshua Roesslein
-License:
-    WASP library: BSD
-    Specification: Public Domain
+License: BSD

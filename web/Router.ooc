@@ -37,7 +37,7 @@ Router: class extends Application {
             }
         }
 
-        // If not match found, use not found app
+        // If no match found, use not found app
         if (!_currentApp) _currentApp = _notFoundApp
 
         _currentApp request = request
