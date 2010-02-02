@@ -1,6 +1,6 @@
 use web, fastcgi
 
-import web/[Application, Request]
+import web/[Application]
 import fastcgi/Server
 
 

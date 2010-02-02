@@ -1,6 +1,15 @@
-use web
-import web/Request
 import structs/HashMap
+
+
+Request: abstract class {
+    path: String
+    method: String
+    remoteAddress: String
+    remoteHost: String
+    remotePort: String
+
+    getHeader: abstract func(name: String) -> String
+}
 
 ResponseWriter: abstract class {
     write: abstract func(data: String) -> Int
@@ -17,7 +26,6 @@ HeaderMap: class extends HashMap<String> {
         super(capacity)
     }
 }
-
 operator [] <T> (map: HeaderMap, key: String) -> T {
     map get(key)
 }
