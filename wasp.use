@@ -1,0 +1,6 @@
+Name: WASP
+Version: 1.0
+Origin: git://github.com/joshthecoder/ooc-web.git
+Description: Web Application and Server Specification
+Requires: FastCGI
+SourcePath: .

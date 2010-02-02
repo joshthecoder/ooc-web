@@ -1,0 +1,14 @@
+ooc-web
+========
+This is a working concept for a Web Application and Server Protocol(WASP).
+WASP will provide a common interface for web applications to any web server
+that implements the protocol. This concept is very similiar to what Python's WSGI provides.
+
+Author: Joshua Roesslein
+License:
+    WASP library: BSD
+    Specification: Public Domain
+
+References:
+    OOC: http://ooc-lang.org
+    WSGI: http://www.python.org/dev/peps/pep-0333/
