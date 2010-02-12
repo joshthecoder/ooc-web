@@ -1,0 +1,3 @@
+ooc-web server interface implementations.
+
+fastcgi: run your application with any fastcgi compatible web server.
