@@ -12,7 +12,7 @@ HelloApplication: class extends Application {
         "Request method: %s" format(request method) println()
         "Request remote addr: %s port %d" format(request remoteAddress, request remotePort) println()
 
-        response sendHeader("Content-type", "text/html")
+        response setHeader("Content-type", "text/html")
         out := BufferReader new()
         out buffer() append("<html><body><h1>Hello world from ooc!!!</h1></body></html>")
         return out

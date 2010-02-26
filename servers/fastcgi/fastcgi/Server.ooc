@@ -74,11 +74,11 @@ FCGIResponse: class extends Response {
 
     init: func(=stream) {}
 
-    sendStatus: func(code: Int, value: String) {
+    setStatus: func(code: Int, value: String) {
         FCGX putString("Status: %d %s\r\n" format(code, value), stream)
     }
 
-    sendHeader: func(name: String, value: String) {
+    setHeader: func(name: String, value: String) {
         FCGX putString("%s: %s\r\n" format(name, value), stream)
     }
 }

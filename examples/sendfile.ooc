@@ -7,7 +7,7 @@ import io/[Reader, FileReader]
 
 SendFile: class extends Application {
     processRequest: func -> Reader {
-        response sendHeader("Content-type", "text/plain; charset=utf-8")
+        response setHeader("Content-type", "text/plain; charset=utf-8")
         return FileReader new("../README")
     }
 }

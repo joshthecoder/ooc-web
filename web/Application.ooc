@@ -12,8 +12,8 @@ Request: abstract class {
 }
 
 Response: abstract class {
-    sendStatus: abstract func(code: Int, message: String)
-    sendHeader: abstract func(name: String, value: String)
+    setStatus: abstract func(code: Int, message: String)
+    setHeader: abstract func(name: String, value: String)
 }
 
 Application: abstract class {
