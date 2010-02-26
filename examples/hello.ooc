@@ -1,21 +1,19 @@
 use web, fastcgi
 
-import io/Reader
 import text/StringBuffer
 import web/[Application]
 import fastcgi/Server
 
 
 HelloApplication: class extends Application {
-    processRequest: func -> Reader {
+    processRequest: func {
         "Request path: %s" format(request path) println()
         "Request method: %s" format(request method) println()
         "Request remote addr: %s port %d" format(request remoteAddress, request remotePort) println()
 
         response setHeader("Content-type", "text/html")
-        out := BufferReader new()
-        out buffer() append("<html><body><h1>Hello world from ooc!!!</h1></body></html>")
-        return out
+        out := response body()
+        out write("<html><body><h1>Hello world from ooc!!!</h1></body></html>")
     }
 }
 

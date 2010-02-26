@@ -27,6 +27,7 @@ FCGX: cover {
     getString: extern(FCGX_GetStr) static func(String, Int, FCGXStream*) -> Int
     getLine: extern(FCGX_GetLine) static func(String, Int, FCGXStream*) -> String
     putChar: extern(FCGX_PutChar) static func(Char, FCGXStream*) -> Int
+    putStringWithLength: extern(FCGX_PutStr) static func(String, Int, FCGXStream*) -> Int
     putString: extern(FCGX_PutS) static func(String, FCGXStream*) -> Int
     getParam: extern(FCGX_GetParam) static func(String, Pointer) -> String
 

@@ -1,6 +1,7 @@
 use web, fastcgi
 import web/[Server, Application]
 import fastcgi/fcgx
+import io/Writer
 
 
 /**
@@ -40,17 +41,7 @@ FCGIServer: class extends Server {
             // dispatch request to Application
             application request = request
             application response = FCGIResponse new(fcgi out)
-            responseBody := application processRequest()
-
-            // send response body
-            if (responseBody) {
-                FCGX putString("\r\n", fcgi out)
-                while (responseBody hasNext()) {
-                    if (FCGX putChar(responseBody read(), fcgi out) == -1) {
-                        Exception new(This, "Write error while sending response body!") throw()
-                    }
-                }
-            }
+            application processRequest()
         }
 
         return true
@@ -71,14 +62,47 @@ FCGIRequest: class extends Request {
 
 FCGIResponse: class extends Response {
     stream: FCGXStream*
+    bodyWriter: Writer
 
-    init: func(=stream) {}
+    init: func(=stream) { bodyWriter = null }
 
     setStatus: func(code: Int, value: String) {
+        if(bodyWriter) Exception new("May not set status code once body() has been called") throw()
         FCGX putString("Status: %d %s\r\n" format(code, value), stream)
     }
 
     setHeader: func(name: String, value: String) {
+        if(bodyWriter) Exception new("May not set header once body() has been called") throw()
         FCGX putString("%s: %s\r\n" format(name, value), stream)
+    }
+
+    body: func -> Writer {
+        if (!bodyWriter) {
+            FCGX putString("\r\n", stream)  // terminate headers
+            bodyWriter = FCGIBodyWriter new(stream)
+        }
+        return bodyWriter
+    }
+}
+
+FCGIBodyWriter: class extends Writer {
+    stream: FCGXStream*
+
+    init: func(=stream) {}
+
+    close: func {}
+
+    write: func ~chr (chr: Char) {
+        if (FCGX putChar(chr, stream) == -1) {
+            Exception new("Error while sending response body byte") throw()
+        }
+    }
+
+    write: func(chars: String, length: SizeT) -> SizeT {
+        bytes := FCGX putStringWithLength(chars, length, stream)
+        if (bytes == -1) {
+            Exception new("Error while sending response body string") throw()
+        }
+        return bytes
     }
 }
