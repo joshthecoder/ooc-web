@@ -43,5 +43,16 @@ Application: abstract class {
         Invoked by the server when ever there is a request to be processed.
     */
     processRequest: abstract func
+
+    /**
+        This is called by the server when ever it spawns a new thread.
+
+        If your application is not thread-safe, override this method
+        to perform a "cloning" of the application to make it thread safe
+        and return a reference to the cloned copy.
+
+        :return: A copy of the Application to use in the new server thread.
+    */
+    spawn: func -> This { this }
 }
 
