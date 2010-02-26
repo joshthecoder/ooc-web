@@ -17,6 +17,6 @@ SendFile: class extends Application {
 
 main: func {
     server := FCGIServer new(":8000")
-    server application = SendFile new()
+    server setApplication(SendFile new())
     server run()
 }

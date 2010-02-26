@@ -19,7 +19,8 @@ HelloApplication: class extends Application {
 
 main: func {
     server := FCGIServer new(":8000")
-    server application = HelloApplication new()
+    server setApplication(HelloApplication new())
+
     server run()
 }
 

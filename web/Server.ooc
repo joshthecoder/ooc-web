@@ -2,6 +2,10 @@ use web
 import web/Application
 
 Server: abstract class {
-    run: func -> Bool { return false }
     application: Application
+
+    setApplication: func(=application) {}
+    application: func -> Application { application }
+
+    run: func -> Bool { return false }
 }
