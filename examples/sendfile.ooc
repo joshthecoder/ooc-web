@@ -2,14 +2,16 @@ use web, fastcgi
 
 import web/Application
 import fastcgi/Server
-import io/[Reader, FileReader]
+import io/[FileReader, File]
 
 
-//TODO: update this to use the new body() writer
 SendFile: class extends Application {
-    processRequest: func -> Reader {
+    processRequest: func {
+        file := File new("../README")
+
         response setHeader("Content-type", "text/plain; charset=utf-8")
-        return FileReader new("../README")
+        response setHeader("Content-length", file size() toString())
+        response body() write(FileReader new(file))
     }
 }
 
