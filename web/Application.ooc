@@ -1,4 +1,4 @@
-import io/Writer
+import io/[Reader, Writer]
 
 
 Request: abstract class {
@@ -12,6 +12,11 @@ Request: abstract class {
         Returns the value for the HTTP request header for the given key.
     */
     getHeader: abstract func(name: String) -> String
+
+    /**
+        Returns a Reader object for reading the request body.
+    */
+    body: abstract func -> Reader
 }
 
 Response: abstract class {

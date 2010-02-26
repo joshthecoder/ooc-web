@@ -1,7 +1,7 @@
 use web, fastcgi
 import web/[Server, Application]
 import fastcgi/fcgx
-import io/Writer
+import io/[Reader, Writer]
 
 
 /**
@@ -31,7 +31,7 @@ FCGIServer: class extends Server {
         // Begin listening for requests
         while (FCGX accept(fcgi&) == 0) {
             // parse and setup request
-            request := FCGIRequest new(fcgi envp)
+            request := FCGIRequest new(fcgi envp, fcgi in)
             request path = FCGX getParam("REQUEST_URI", fcgi envp)
             request method = FCGX getParam("REQUEST_METHOD", fcgi envp)
             request remoteAddress = FCGX getParam("REMOTE_ADDR", fcgi envp)
@@ -50,13 +50,18 @@ FCGIServer: class extends Server {
 
 FCGIRequest: class extends Request {
     _envp: Pointer
+    stream: FCGXStream*
 
-    init: func(=_envp) {}
+    init: func(=_envp, =stream) {}
 
     getHeader: func(name: String) -> String {
         value := FCGX getParam("HTTP_%s" format(name toUpper()), _envp)
         if (value != null) return value clone()
         else return value
+    }
+
+    body: func -> Reader {
+        FCGIBodyReader new(stream)
     }
 }
 
@@ -83,6 +88,42 @@ FCGIResponse: class extends Response {
         }
         return bodyWriter
     }
+}
+
+FCGIBodyReader: class extends Reader {
+    stream: FCGXStream*
+
+    init: func(=stream) {}
+
+    read: func ~string(chars: String, length: Int) -> SizeT {
+        bytesRead := FCGX getString(chars, length, stream)
+        if (bytesRead == -1) Exception new("Error while reading string") throw()
+        marker += bytesRead
+        return bytesRead
+    }
+
+    read: func(chars: String, offset: Int, count: Int) -> SizeT {
+        skip(offset - marker)
+        return read(chars, count)
+    }
+
+    read: func ~char -> Char {
+        c := FCGX getChar(stream)
+        if (c == -1) Exception new("Error while reading byte") throw()
+        marker += 1
+        return c
+    }
+
+    hasNext: func -> Bool {
+        c := FCGX getChar(stream)
+        if (c == -1) return false
+        FCGX unGetChar(c, stream)
+        return true
+    }
+
+    rewind: func(offset: Int) { Exception new("Rewind not supported") throw() }
+    mark: func -> Long { marker }
+    reset: func(marker: Long) { Exception new("Reset not supported") throw() }
 }
 
 FCGIBodyWriter: class extends Writer {
