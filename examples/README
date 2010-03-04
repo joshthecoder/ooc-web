@@ -1,0 +1,9 @@
+Setup
+-----
+1. Copy the web folder and the web.ooc file into your OOC_LIBS directory.
+2. Install the FastCGI server. See the servers folder.
+3. Compile the examples.
+4. Configure your FastCGI enabled web server to connect
+    with the application on port 8000.
+5. Launch the example binary.
+6. Visit the URL of your application in a browser and enjoy!

@@ -1,9 +1,12 @@
 ooc-web
 ========
-A web application and server library. This provides a
-standard interface for web applications to communicate with web servers.
-Your web application will work with any web server that implements
-this specification.
+A web application framework for the ooc programming language.
+This provides a common API between your web application and
+any server that implements the Server interface.
+
+See examples for how to use ooc-web.
+For any help feel free to hope into the #ooc-lang IRC channel
+on freenode. You can also message me on github with any questions.
 
 Author: Joshua Roesslein
 License: BSD
