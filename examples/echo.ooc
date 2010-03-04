@@ -2,7 +2,6 @@ use web, fastcgi
 
 import web/Application
 import fastcgi/Server
-import text/StringBuffer
 
 EchoApplication: class extends Application {
     processRequest: func {
