@@ -1,6 +1,5 @@
 use web, fastcgi
 
-import text/StringBuffer
 import web/[Application]
 import fastcgi/Server
 
